@@ -1,4 +1,4 @@
-package com.tailoredshapes.jblocks;
+package com.tailoredshapes.jblocks.schemapass;
 
 /**
  * Hello world!

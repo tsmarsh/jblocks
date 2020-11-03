@@ -1,4 +1,4 @@
-package com.tailoredshapes.jblocks;
+package com.tailoredshapes.jblocks.schemablock;
 
 import org.everit.json.schema.Schema;
 import org.everit.json.schema.loader.SchemaLoader;

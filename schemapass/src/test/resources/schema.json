@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "required": [
+    "owner",
+    "title",
+    "description",
+    "items"
+  ],
+  "properties": {
+    "owner": {
+      "$id": "#/properties/owner",
+      "type": "object",
+      "title": "owner",
+      "description": "The owner of the todo list",
+      "default": {},
+      "examples": [
+        {
+          "forename": "Bob",
+          "surname": "Smith"
+        }
+      ],
+      "required": [
+        "forename",
+        "surname"
+      ],
+      "properties": {
+        "forename": {
+          "$id": "#/properties/owner/properties/forename",
+          "type": "string",
+          "title": "Forename of owner",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "faker": "name.firstName",
+          "examples": [
+            "Bob"
+          ]
+        },
+        "surname": {
+          "$id": "#/properties/owner/properties/surname",
+          "type": "string",
+          "title": "The surname schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "faker": "name.lastName",
+          "examples": [
+            "Smith"
+          ]
+        }
+      }
+    },
+    "title": {
+      "$id": "#/properties/title",
+      "type": "string",
+      "title": "The title schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "faker": "lorem.sentence",
+      "examples": [
+        "Quick start"
+      ]
+    },
+    "description": {
+      "$id": "#/properties/description",
+      "type": "string",
+      "title": "The description schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "faker": "lorem.paragraph",
+      "examples": [
+        "A quick todo to figure out what we need to do"
+      ]
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$id": "#/properties/items/items",
+        "type": "object",
+        "title": "todo",
+        "description": "An explanation about the purpose of this instance.",
+        "default": {},
+        "properties": {
+          "status": {
+            "$id": "#/properties/items/items/anyOf/0/properties/status",
+            "type": "string",
+            "title": "The status schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "enum": [
+              "ready",
+              "doing",
+              "done"
+            ],
+            "examples": [
+              "ready",
+              "doing",
+              "done"
+            ]
+          },
+          "body": {
+            "$id": "#/properties/items/items/anyOf/0/properties/body",
+            "type": "string",
+            "title": "The body schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "faker": "lorem.sentence",
+            "examples": [
+              "write jq"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-package com.tailoredshapes.jblocks;
+package com.tailoredshapes.jblocks.schemapass;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
