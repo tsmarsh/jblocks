@@ -12,6 +12,7 @@
   <modules>
     <module>schemablock</module>
     <module>schemapass</module>
+    <module>queryblock</module>
   </modules>
 
   <name>jblocks</name>
