@@ -8,7 +8,6 @@ import spark.Request;
 import spark.Response;
 
 import static com.tailoredshapes.underbar.IO.slurp;
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -22,7 +21,7 @@ public class QueryHandlerTest {
 
 
     @Test
-    public void shouldExecuteAQueryOnAPayload() throws Exception{
+    public void shouldExecuteAQueryOnAPayload() throws Exception {
         String query = "[.items[] | select(.status == \"doing\").body]";
 
         when(request.body()).thenReturn(slurp(getClass().getResourceAsStream("/good.json")));

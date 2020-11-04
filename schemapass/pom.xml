@@ -13,39 +13,12 @@
 
     <name>schemapass</name>
 
-    <url>http://www.example.com</url>
-
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
-
     <dependencies>
-        <dependency>
-            <groupId>com.sparkjava</groupId>
-            <artifactId>spark-core</artifactId>
-            <version>2.9.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.tailoredshapes.underbar</groupId>
-            <artifactId>io</artifactId>
-            <version>0.1.2</version>
-        </dependency>
         <dependency>
             <groupId>com.github.everit-org.json-schema</groupId>
             <artifactId>org.everit.json.schema</artifactId>
             <version>1.12.1</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.25</version>
-        </dependency>
-
     </dependencies>
 
     <build>
