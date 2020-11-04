@@ -1,6 +1,7 @@
 FROM gcr.io/distroless/java:11
 
 ENV PORT 3000
+ENV NEXT "http://local:3333"
 ENV QUERY_URL "file:///tmp/query.jq"
 
 EXPOSE 3000

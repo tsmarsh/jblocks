@@ -45,6 +45,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.2.4</version>
+                <configuration>
+                    <finalName>SHADED</finalName>
+                </configuration>
                 <executions>
                     <execution>
                         <phase>package</phase>
