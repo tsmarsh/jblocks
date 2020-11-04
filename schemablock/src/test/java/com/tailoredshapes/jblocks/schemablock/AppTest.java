@@ -16,13 +16,15 @@ import static io.restassured.RestAssured.given;
 public class AppTest {
 
     private static App app;
+    static int port = 8068;
 
     @BeforeClass
     public static void setUp() throws Exception {
         try (InputStream inputStream = AppTest.class.getResourceAsStream("/schema.json")) {
             JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
 
-            app = new App(8066, SchemaLoader.load(rawSchema));
+
+            app = new App(port, SchemaLoader.load(rawSchema));
         }
     }
 
@@ -34,7 +36,7 @@ public class AppTest {
     @Test
     public void canValidateAGoodJSON()throws Exception{
         String good = slurp(getClass().getResourceAsStream("/good.json"));
-        given().port(8066).body(good).
+        given().port(port).body(good).
                 when().post("/").
                 then().statusCode(200);
     }
@@ -42,7 +44,7 @@ public class AppTest {
     @Test
     public void canValidateABadJSON()throws Exception{
         String good = slurp(getClass().getResourceAsStream("/bad.json"));
-        given().port(8066).body(good).
+        given().port(port).body(good).
                 when().post("/").
                 then().statusCode(400);
     }

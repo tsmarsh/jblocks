@@ -19,6 +19,7 @@ import static spark.Service.ignite;
 @RunWith(MockitoJUnitRunner.class)
 public class QueryHandlerTest {
 
+    private static int port = 6061;
     @Mock
     Request request;
 
@@ -34,7 +35,7 @@ public class QueryHandlerTest {
     @BeforeClass
     public static void setUp() throws Exception {
         testServer = ignite();
-        testServer.port(6060);
+        testServer.port(port);
         testServer.post("/", (req, resp) -> {
             nextResponse.body(req.body());
             return req.body();
@@ -58,7 +59,7 @@ public class QueryHandlerTest {
 
         when(request.body()).thenReturn(slurp(getClass().getResourceAsStream("/good.json")));
 
-        QueryHandler queryHandler = new QueryHandler(query, "http://localhost:6060");
+        QueryHandler queryHandler = new QueryHandler(query, "http://localhost:" + port);
         queryHandler.handle(request, response);
 
         verify(response).status(200);
@@ -72,7 +73,7 @@ public class QueryHandlerTest {
 
         when(request.body()).thenReturn(slurp(getClass().getResourceAsStream("/good.json")));
 
-        QueryHandler queryHandler = new QueryHandler(query, "http://localhost:6060");
+        QueryHandler queryHandler = new QueryHandler(query, "http://localhost:" + port);
         queryHandler.handle(request, response);
 
         verify(response).status(200);

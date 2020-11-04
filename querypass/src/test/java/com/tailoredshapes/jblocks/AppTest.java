@@ -18,15 +18,19 @@ public class AppTest {
     private static App app;
 
     static Service testServer;
+    private static int testPort = 7070;
+    private static int port = 8067;
+
 
     @BeforeClass
     public static void setUp() throws Exception {
         testServer = ignite();
-        testServer.port(7070);
+        testServer.port(testPort);
         testServer.post("/", (req, resp) -> req.body());
 
 
-        app = new App(8066, "[.items[] | select(.status == \"doing\").body]", "http://localhost:7070/");
+
+        app = new App(port, "[.items[] | select(.status == \"doing\").body]", "http://localhost:" + testPort + "/");
     }
 
     @AfterClass
@@ -38,7 +42,7 @@ public class AppTest {
     @Test
     public void canQueryAGoodJSON()throws Exception{
         String good = slurp(getClass().getResourceAsStream("/good.json"));
-        given().port(8066).body(good).
+        given().port(port).body(good).
                 when().post("/").
                 then().statusCode(200);
     }

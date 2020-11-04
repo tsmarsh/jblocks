@@ -4,7 +4,6 @@ import com.arakelian.jq.ImmutableJqLibrary;
 import com.arakelian.jq.ImmutableJqRequest;
 import com.arakelian.jq.JqResponse;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -21,16 +20,16 @@ public class QueryHandler implements Route {
     @Override
     public Object handle(Request request, Response response) throws Exception {
         ImmutableJqRequest jq = ImmutableJqRequest.builder()
-                                                  .lib(jqLibrary)
-                                                  .input(request.body())
-                                                  .filter(query).build();
+                .lib(jqLibrary)
+                .input(request.body())
+                .filter(query).build();
 
         JqResponse result = jq.execute();
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             response.status(400);
             response.body(JSONArray.toJSONString(result.getErrors()));
             return "ERROR";
-        }else {
+        } else {
             response.status(200);
             response.body(result.getOutput());
             return "OK";

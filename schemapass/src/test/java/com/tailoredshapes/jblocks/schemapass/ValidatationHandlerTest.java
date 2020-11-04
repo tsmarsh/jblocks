@@ -34,11 +34,12 @@ public class ValidatationHandlerTest {
 
     static Service testServer;
 
+    private static int testPort = 6090;
 
     @BeforeClass
     public static void setUp() throws Exception {
         testServer = ignite();
-        testServer.port(6060);
+        testServer.port(testPort);
         testServer.post("/", (req, resp) -> {
             nextResponse.body(req.body());
             return "OK";
@@ -64,7 +65,7 @@ public class ValidatationHandlerTest {
             schema = SchemaLoader.load(rawSchema);
         }
 
-        ValidatationHandler validatationHandler = new ValidatationHandler(schema, "http://localhost:6060/");
+        ValidatationHandler validatationHandler = new ValidatationHandler(schema, "http://localhost:" + testPort);
         validatationHandler.handle(request, response);
 
         verify(response).status(200);
@@ -132,7 +133,7 @@ public class ValidatationHandlerTest {
             schema = SchemaLoader.load(rawSchema);
         }
 
-        ValidatationHandler validatationHandler = new ValidatationHandler(schema, "http://localhost:6060/");
+        ValidatationHandler validatationHandler = new ValidatationHandler(schema, "http://localhost:" + testPort);
         validatationHandler.handle(request, response);
 
         verify(response).status(400);

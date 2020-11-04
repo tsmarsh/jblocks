@@ -19,17 +19,19 @@ public class AppTest {
     private static App app;
 
     static Service testServer;
+    private static int testPort = 7073;
+    private static int port = 8070;
 
     @BeforeClass
     public static void setUp() throws Exception {
         testServer = ignite();
-        testServer.port(7070);
+        testServer.port(testPort);
         testServer.post("/", (req, resp) -> req.body());
 
         try (InputStream inputStream = AppTest.class.getResourceAsStream("/schema.json")) {
             JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
 
-            app = new App(8066, SchemaLoader.load(rawSchema), "http://localhost:7070/");
+            app = new App(port, SchemaLoader.load(rawSchema), "http://localhost:" + testPort);
         }
     }
 
@@ -42,7 +44,7 @@ public class AppTest {
     @Test
     public void canValidateAGoodJSON()throws Exception{
         String good = slurp(getClass().getResourceAsStream("/good.json"));
-        given().port(8066).body(good).
+        given().port(port).body(good).
                 when().post("/").
                 then().statusCode(200);
     }
@@ -50,7 +52,7 @@ public class AppTest {
     @Test
     public void canValidateABadJSON()throws Exception{
         String good = slurp(getClass().getResourceAsStream("/bad.json"));
-        given().port(8066).body(good).
+        given().port(port).body(good).
                 when().post("/").
                 then().statusCode(400);
     }
