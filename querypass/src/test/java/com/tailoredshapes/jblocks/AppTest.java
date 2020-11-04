@@ -1,20 +1,45 @@
 package com.tailoredshapes.jblocks;
 
+import static com.tailoredshapes.underbar.IO.slurp;
+import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertTrue;
+import static spark.Service.ignite;
 
+import org.json.simple.JSONObject;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import spark.Service;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-{
-    /**
-     * Rigorous Test :-)
-     */
+import java.io.InputStream;
+
+public class AppTest {
+
+    private static App app;
+
+    static Service testServer;
+
+    @BeforeClass
+    public static void setUp() throws Exception {
+        testServer = ignite();
+        testServer.port(7070);
+        testServer.post("/", (req, resp) -> req.body());
+
+
+        app = new App(8066, "[.items[] | select(.status == \"doing\").body]", "http://localhost:7070/");
+    }
+
+    @AfterClass
+    public static void tearDown() throws Exception {
+        testServer.stop();
+        app.service.stop();
+    }
+
     @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
+    public void canQueryAGoodJSON()throws Exception{
+        String good = slurp(getClass().getResourceAsStream("/good.json"));
+        given().port(8066).body(good).
+                when().post("/").
+                then().statusCode(200);
     }
 }

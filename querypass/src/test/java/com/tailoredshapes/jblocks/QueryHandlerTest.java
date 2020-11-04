@@ -1,6 +1,5 @@
 package com.tailoredshapes.jblocks;
 
-import org.json.simple.JSONArray;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -13,7 +12,6 @@ import spark.Response;
 import spark.Service;
 
 import static com.tailoredshapes.underbar.IO.slurp;
-import static com.tailoredshapes.underbar.UnderBar.list;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static spark.Service.ignite;
@@ -47,6 +45,7 @@ public class QueryHandlerTest {
     public void tear() {
         reset(nextResponse);
     }
+
     @AfterClass
     public static void tearDown() throws Exception {
         testServer.stop();
