@@ -1,0 +1,42 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: checkpayload
+  labels:
+    run: checkpayload
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: checkpayload
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: checkpayload
+    spec:
+      volumes:
+        - name: checkpayload-volume
+          emptyDir: {}
+      containers:
+        - image: tsmarsh/schemablock
+          name: checkpayload
+          env:
+            - name: PORT
+              value: "3000"
+            - name: NEXT
+              value: "http://local:3333"
+            - name: SCHEMA_URL
+              value: "file:///mnt/schema/jblocks/k8s/schema/schema.json"
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - mountPath: "/mnt/schema"
+              name: checkpayload-volume
+      initContainers:
+        - image: alpine/git
+          name: git-preloader
+          volumeMounts:
+            - mountPath: "/mnt/schema"
+              name: checkpayload-volume
+          command: ['git','clone', "https://github.com/tsmarsh/jblocks.git", "/mnt/schema/jblocks"]

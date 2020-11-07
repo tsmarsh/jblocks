@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /checkpayload
+            pathType: Prefix
+            backend:
+              service:
+                name: checkpayload
+                port:
+                  number: 3000

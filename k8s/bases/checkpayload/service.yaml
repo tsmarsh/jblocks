@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: checkpayload
+  labels:
+    run: checkpayload
+spec:
+  selector:
+    run: checkpayload
+  ports:
+    - port: 3000
+      protocol: TCP
+      name: http

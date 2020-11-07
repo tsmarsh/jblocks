@@ -1,0 +1,27 @@
+# ----------------------------------------------------
+# apiVersion and kind of Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Adds namespace to all resources.
+namespace: jsonprocessor
+
+# Value of this field is prepended to the
+# names of all resources, e.g. a deployment named
+# "wordpress" becomes "alices-wordpress".
+namePrefix: jproc-
+
+# Labels to add to all resources and selectors.
+commonLabels:
+  owner: tailoredshapes
+
+# Each entry in this list must resolve to an existing
+# resource definition in YAML.  These are the resource
+# files that kustomize reads, modifies and emits as a
+# YAML string, with resources separated by document
+# markers ("---").
+resources:
+  - bases/checkpayload/deployment.yaml
+  - bases/checkpayload/service.yaml
+  - bases/ingress.yaml
+#  - bases/ingress_class.yaml
