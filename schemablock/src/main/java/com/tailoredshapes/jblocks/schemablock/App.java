@@ -5,9 +5,11 @@ import org.everit.json.schema.loader.SchemaLoader;
 import org.json.JSONObject;
 import spark.Service;
 
+import java.io.File;
 import java.net.URI;
 
 import static com.tailoredshapes.underbar.Die.rethrow;
+import static com.tailoredshapes.underbar.IO.slurp;
 import static spark.Service.ignite;
 
 public class App {
@@ -26,7 +28,13 @@ public class App {
         var port = Integer.parseInt(System.getenv("PORT"));
 
         var uri = rethrow(() -> new URI(schema_url), () -> "Invalid URI for schema");
-        var schema = SchemaLoader.load(new JSONObject(uri));
+
+        JSONObject schemaJson = new JSONObject(slurp(new File(uri)));
+        System.out.println(" ------------ Using Schema: ------------");
+        System.out.println(schemaJson.toString(4));
+        System.out.println(" ------------ End Schema: ------------");
+
+        var schema = SchemaLoader.load(schemaJson);
 
         new App(port, schema);
     }
