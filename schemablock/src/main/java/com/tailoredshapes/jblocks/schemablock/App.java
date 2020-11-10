@@ -28,7 +28,6 @@ public class App {
         var port = Integer.parseInt(System.getenv("PORT"));
 
         var uri = rethrow(() -> new URI(schema_url), () -> "Invalid URI for schema");
-
         JSONObject schemaJson = new JSONObject(slurp(new File(uri)));
         System.out.println(" ------------ Using Schema: ------------");
         System.out.println(schemaJson.toString(4));
