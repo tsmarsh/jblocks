@@ -9,7 +9,7 @@ namespace: jsonprocessor
 # Value of this field is prepended to the
 # names of all resources, e.g. a deployment named
 # "wordpress" becomes "alices-wordpress".
-namePrefix: jproc-
+# namePrefix: jproc-
 
 # Labels to add to all resources and selectors.
 commonLabels:

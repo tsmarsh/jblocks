@@ -3,17 +3,17 @@ apiVersion: apps/v1
 metadata:
   name: checkpayload
   labels:
-    run: checkpayload
+    app: checkpayload
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      run: checkpayload
+      app: checkpayload
   template:
     metadata:
       creationTimestamp: null
       labels:
-        run: checkpayload
+        app: checkpayload
     spec:
       volumes:
         - name: checkpayload-volume

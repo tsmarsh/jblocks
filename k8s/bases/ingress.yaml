@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: ingress
 spec:
+
   rules:
     - http:
         paths:
@@ -10,6 +11,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: checkpayload
+                name: checkpayloadservice
                 port:
-                  number: 3000
+                  number: 4000

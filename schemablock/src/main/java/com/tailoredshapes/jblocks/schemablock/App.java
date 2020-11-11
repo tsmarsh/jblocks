@@ -21,6 +21,10 @@ public class App {
         service.port(port);
         ValidatationHandler handler = new ValidatationHandler(schema);
         service.post("/", handler);
+        service.get("/", ((request, response) -> {
+            response.status(200);
+            response.body("OK");
+            return "OK";}));
     }
 
     public static void main(String[] args) {

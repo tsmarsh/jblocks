@@ -18,7 +18,7 @@ public class Stepdefs implements En {
         Given("I have I have the file {string}", (String filename) ->
             rs.body(slurp(getClass().getResourceAsStream(filename))));
         When("I post it to the service$", () ->
-            response = rs.post("/checkpayload"));
+            response = rs.post("http://localhost/checkpayload"));
         Then("I should receive a {int}", (Integer statusCode) -> {
             response.then().statusCode(statusCode);
         });
