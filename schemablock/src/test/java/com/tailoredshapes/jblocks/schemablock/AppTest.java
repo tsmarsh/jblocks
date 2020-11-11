@@ -24,7 +24,7 @@ public class AppTest {
             JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
 
 
-            app = new App(port, SchemaLoader.load(rawSchema));
+            app = new App(port, SchemaLoader.load(rawSchema), "test");
         }
     }
 
@@ -37,7 +37,7 @@ public class AppTest {
     public void canValidateAGoodJSON()throws Exception{
         String good = slurp(getClass().getResourceAsStream("/good.json"));
         given().port(port).body(good).
-                when().post("/").
+                when().post("/test").
                 then().statusCode(200);
     }
 
@@ -45,7 +45,7 @@ public class AppTest {
     public void canValidateABadJSON()throws Exception{
         String good = slurp(getClass().getResourceAsStream("/bad.json"));
         given().port(port).body(good).
-                when().post("/").
+                when().post("/test").
                 then().statusCode(400);
     }
 }

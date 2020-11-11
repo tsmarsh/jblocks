@@ -19,13 +19,15 @@ public class ValidatationHandler implements Route {
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
+        String body = request.body();
         try {
-            schema.validate(new JSONObject(request.body()));
+            schema.validate(new JSONObject(body));
             response.status(200);
+            response.body(body);
         }catch (ValidationException ve){
             response.status(400);
             response.body(ve.toJSON().toString(2));
         }
-        return "OK";
+        return body;
     }
 }
