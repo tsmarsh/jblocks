@@ -2,7 +2,7 @@ FROM openjdk:11
 
 ENV PORT 3000
 ENV PATH_PREFIX ""
-ENV SCHEMA_URL "file:///tmp/schema.jq"
+ENV QUERY_URL "file:///tmp/schema.jq"
 ENV NEXT "http://localhost:4000"
 
 EXPOSE 3000
