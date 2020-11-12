@@ -19,7 +19,7 @@ spec:
         - name: checkpayload-volume
           emptyDir: {}
       containers:
-        - image: tsmarsh/schemablock
+        - image: tsmarsh/schemapass
           name: checkpayload
           env:
             - name: PORT
@@ -27,7 +27,7 @@ spec:
             - name: PATH_PREFIX
               value: "checkpayload"
             - name: NEXT
-              value: "http://doingservice:3333"
+              value: "http://doingservice:3000"
             - name: SCHEMA_URL
               value: "file:///mnt/schema/jblocks/k8s/schema/schema.json"
           ports:

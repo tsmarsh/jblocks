@@ -27,12 +27,13 @@ public class QueryHandler implements Route {
         JqResponse result = jq.execute();
         if (result.hasErrors()) {
             response.status(400);
-            response.body(JSONArray.toJSONString(result.getErrors()));
-            return "ERROR";
+            String body = JSONArray.toJSONString(result.getErrors());
+            response.body(body);
+            return body;
         } else {
             response.status(200);
             response.body(result.getOutput());
-            return "OK";
+            return result.getOutput();
         }
     }
 }

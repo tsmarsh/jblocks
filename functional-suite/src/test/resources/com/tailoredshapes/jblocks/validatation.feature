@@ -3,5 +3,5 @@ Feature: Submitting a json file for validation
     Given I have I have the file "/schema/good.json"
     When I post it to the service
     Then I should receive a 200
-    And the body should be "/schema/good.json"
+    And the body should be "/expected.json"
 

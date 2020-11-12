@@ -3,6 +3,9 @@
 clean:
 	mvn clean
 
+feature:
+	mvn -pl functional-suite -am test
+
 all: pushschemablock pushschemapass pushqueryblock pushquerypass
 	kubectl delete -k k8s
 	kubectl apply -k k8s
