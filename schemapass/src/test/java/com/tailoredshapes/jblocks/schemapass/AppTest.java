@@ -31,7 +31,7 @@ public class AppTest {
         try (InputStream inputStream = AppTest.class.getResourceAsStream("/schema.json")) {
             JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
 
-            app = new App(port, SchemaLoader.load(rawSchema), "http://localhost:" + testPort);
+            app = new App(port, SchemaLoader.load(rawSchema), "","http://localhost:" + testPort);
         }
     }
 
