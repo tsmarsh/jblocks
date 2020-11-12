@@ -30,7 +30,11 @@ public class AppTest {
 
 
 
-        app = new App(port, "[.items[] | select(.status == \"doing\").body]", "http://localhost:" + testPort + "/");
+        app = new App(
+                port,
+                "[.items[] | select(.status == \"doing\").body]",
+                "", "http://localhost:" +
+                testPort + "/");
     }
 
     @AfterClass
