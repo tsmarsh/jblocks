@@ -12,6 +12,7 @@ import java.io.InputStream;
 
 import static com.tailoredshapes.underbar.IO.slurp;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 import static spark.Service.ignite;
 
 public class AppTest {
@@ -26,7 +27,7 @@ public class AppTest {
     public static void setUp() throws Exception {
         testServer = ignite();
         testServer.port(testPort);
-        testServer.post("/", (req, resp) -> req.body());
+        testServer.post("/", (req, resp) -> "bounced");
 
         try (InputStream inputStream = AppTest.class.getResourceAsStream("/schema.json")) {
             JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
@@ -44,16 +45,25 @@ public class AppTest {
     @Test
     public void canValidateAGoodJSON()throws Exception{
         String good = slurp(getClass().getResourceAsStream("/good.json"));
-        given().port(port).body(good).
-                when().post("/").
-                then().statusCode(200);
+        given().
+                port(port).
+                body(good).
+        when().
+                post("/").
+        then().
+                statusCode(200).body(equalTo("bounced"));
     }
 
     @Test
     public void canValidateABadJSON()throws Exception{
         String good = slurp(getClass().getResourceAsStream("/bad.json"));
-        given().port(port).body(good).
-                when().post("/").
-                then().statusCode(400);
+        String errors = slurp(getClass().getResourceAsStream("/errors.json"));
+        given().
+                port(port).
+                body(good).
+        when().
+                post("/").
+        then().
+                statusCode(400).body(equalTo(errors));
     }
 }

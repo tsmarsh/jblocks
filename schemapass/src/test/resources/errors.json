@@ -1,0 +1,47 @@
+{
+  "schemaLocation": "#",
+  "pointerToViolation": "#",
+  "causingExceptions": [
+    {
+      "schemaLocation": "#/properties/owner",
+      "pointerToViolation": "#/owner",
+      "causingExceptions": [
+        {
+          "schemaLocation": "#/properties/owner",
+          "pointerToViolation": "#/owner",
+          "causingExceptions": [],
+          "keyword": "required",
+          "message": "required key [forename] not found"
+        },
+        {
+          "schemaLocation": "#/properties/owner/properties/surname",
+          "pointerToViolation": "#/owner/surname",
+          "causingExceptions": [],
+          "keyword": "type",
+          "message": "expected type: String, found: Boolean"
+        }
+      ],
+      "message": "2 schema violations found"
+    },
+    {
+      "schemaLocation": "#/properties/title",
+      "pointerToViolation": "#/title",
+      "causingExceptions": [],
+      "keyword": "type",
+      "message": "expected type: String, found: Integer"
+    },
+    {
+      "schemaLocation": "#/properties/items/items/properties/status",
+      "pointerToViolation": "#/items/0/status",
+      "causingExceptions": [{
+        "pointerToViolation": "#/items/0/status",
+        "causingExceptions": [],
+        "keyword": "enum",
+        "message": "egg is not a valid enum value"
+      }],
+      "keyword": "allOf",
+      "message": "#: only 1 subschema matches out of 2"
+    }
+  ],
+  "message": "4 schema violations found"
+}
