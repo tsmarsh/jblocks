@@ -17,7 +17,7 @@ public class AppTest {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        app = new App(8066, "[.items[] | select(.status == \"doing\").body]");
+        app = new App(8066, "[.items[] | select(.status == \"doing\").body]", "");
     }
 
     @AfterClass

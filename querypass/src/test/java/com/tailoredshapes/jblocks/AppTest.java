@@ -38,14 +38,14 @@ public class AppTest {
     }
 
     @AfterClass
-    public static void tearDown() throws Exception {
+    public static void tearDown() {
         testServer.stop();
         app.service.stop();
     }
 
     @Test
-    public void canQueryAGoodJSON()throws Exception{
-        String good = slurp(getClass().getResourceAsStream("/good.json"));
+    public void canQueryAGoodJSON(){
+        var good = slurp(getClass().getResourceAsStream("/good.json"));
         given().port(port).body(good).
                 when().post("/").
                 then().statusCode(200);
