@@ -1,44 +1,42 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: checkpayload
+  name: doing
   labels:
-    app: checkpayload
+    app: doing
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: checkpayload
+      app: doing
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: checkpayload
+        app: doing
     spec:
       volumes:
-        - name: checkpayload-volume
+        - name: doing-volume
           emptyDir: {}
       containers:
-        - image: tsmarsh/schemapass
+        - image: tsmarsh/queryblock
           name: checkpayload
           env:
             - name: PORT
-              value: "8080"
+              value: "3000"
             - name: PATH_PREFIX
-              value: "checkpayload"
-            - name: NEXT
-              value: "http://splitItems:3000"
+              value: ""
             - name: SCHEMA_URL
-              value: "file:///mnt/schema/jblocks/k8s/schema/schema.json"
+              value: "file:///mnt/schema/jblocks/k8s/queries/doing.jq"
           ports:
             - containerPort: 3000
           volumeMounts:
             - mountPath: "/mnt/schema"
-              name: checkpayload-volume
+              name: doing-volume
       initContainers:
         - image: alpine/git
           name: git-preloader
           volumeMounts:
             - mountPath: "/mnt/schema"
-              name: checkpayload-volume
+              name: doing-volume
           command: ['git','clone', "https://github.com/tsmarsh/jblocks.git", "/mnt/schema/jblocks"]

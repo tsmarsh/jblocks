@@ -1,12 +1,15 @@
-FROM gcr.io/distroless/java:11
+FROM openjdk:11
 
 ENV PORT 3000
-ENV NEXT "http://local:3333"
-ENV QUERY_URL "file:///tmp/query.jq"
+ENV PATH_PREFIX ""
+ENV SCHEMA_URL "file:///tmp/schema.jq"
+ENV NEXT "http://localhost:4000"
 
 EXPOSE 3000
+
+RUN mkdir -p /mnt/schema
 
 COPY /target/SHADED.jar /app/app.jar
 WORKDIR /app
 
-CMD ["app.jar"]
+CMD ["java", "-jar", "app.jar"]

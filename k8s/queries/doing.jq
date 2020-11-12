@@ -1,0 +1,1 @@
+[.items[] | select(.status == "doing").body]

@@ -27,7 +27,7 @@ spec:
             - name: PATH_PREFIX
               value: "checkpayload"
             - name: NEXT
-              value: "http://local:3333"
+              value: "http://doingservice:3333"
             - name: SCHEMA_URL
               value: "file:///mnt/schema/jblocks/k8s/schema/schema.json"
           ports:

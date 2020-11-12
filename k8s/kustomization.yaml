@@ -23,5 +23,6 @@ commonLabels:
 resources:
   - bases/checkpayload/deployment.yaml
   - bases/checkpayload/service.yaml
+  - bases/doing/deployment.yaml
+  - bases/doing/service.yaml
   - bases/ingress.yaml
-#  - bases/ingress_class.yaml
